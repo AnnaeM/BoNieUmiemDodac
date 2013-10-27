@@ -21,7 +21,7 @@ public class Sporty extends ListActivity {
 		return true;
 	}
 	
-	String listArray[] = { "Spacer", "Bieganie", "P³ywanie", "Spanie" };
+	String listArray[] = { "Bieganie", "P³ywanie", "Jazda na rowerze" };
 
 	/** Called when the activity is first created. */
 	@Override

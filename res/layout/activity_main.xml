@@ -40,13 +40,5 @@
         android:onClick="doPogody"
         android:text="@android:string/ok" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnMiasto"
-        android:layout_centerVertical="true"
-        android:onClick="doSportów"
-        android:text="Sporty" />
 
 </RelativeLayout>

@@ -31,10 +31,10 @@ public class MainActivity extends Activity {
 		// intent
 		startActivity(intent);
 	}
-	
-	public void doSportów(View view){
+	/*
+	public void doSportow(View view){
 		Intent intent = new Intent(this, Sporty.class);
 		startActivity(intent);
 		
-	}
+	}*/
 }
