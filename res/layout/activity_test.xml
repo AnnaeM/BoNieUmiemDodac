@@ -1,0 +1,87 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Test" >
+
+    <EditText
+        android:id="@+id/miasto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="Miasto" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/miasto"
+        android:layout_marginTop="15dp"
+        android:text="Sat, 02 Nov 2013 12:09:41" />
+
+    <EditText
+        android:id="@+id/pogoda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/localTime"
+        android:ems="10"
+        android:hint="Pogoda" />
+
+    <Button
+        android:id="@+id/sporty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/wiatr"
+        android:layout_below="@+id/wiatr"
+        android:layout_marginTop="21dp"
+        android:onClick="sporty"
+        android:text="Sprawdz sporty" />
+
+    <EditText
+        android:id="@+id/localTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/pogoda"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:editable="false"
+        android:hint="Local time(zmien w programie)" /> 
+
+    <EditText
+        android:id="@+id/wiatr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/localTime"
+        android:layout_marginTop="96dp"
+        android:ems="10"
+        android:hint="Predkosc wiatru"
+        android:inputType="numberDecimal"  />
+
+    <EditText
+        android:id="@+id/temperatura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/wiatr"
+        android:layout_alignLeft="@+id/wiatr"
+        android:layout_marginBottom="48dp"
+        android:ems="10"
+        android:hint="Temperatura w st C"
+        android:inputType="numberDecimal" />
+
+</RelativeLayout>
+
+</ScrollView>

@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//import com.projekt.pogodynka.R;
+
 //import com.projekt.pogodynka.Sporty;
 
 import android.app.Activity;
@@ -26,6 +28,7 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ForecastActivity extends Activity {
@@ -41,6 +44,7 @@ public class ForecastActivity extends Activity {
 	public List<HourlyForecast> hourlyForecast;
 	public List<ForecastDay> txt10day;
 	public List<ForecastDay> simple10day;
+	public JSONObject jObject;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,8 @@ public class ForecastActivity extends Activity {
 		// TODO Auto-generated method stub
 		String request = GET_WEATHER_URL;
 		HttpResponse rp = null;
-		JSONObject jObject = null;
+		// JSONObject jObject = null;
+		jObject = null;
 		try {
 			rp = (new DefaultHttpClient()).execute(new HttpPost(request));
 			Log.i("COS", "W pierwszym traju");
@@ -392,7 +397,8 @@ public class ForecastActivity extends Activity {
 
 		// -------------------------------
 		TextView pogoda = (TextView) findViewById(R.id.pogoda);
-		pogoda.setText("W tej chwili:\n"+cndtns.feelslikeString + "\n" + cndtns.weather + "\n");
+		pogoda.setText("W tej chwili:\n" + cndtns.feelslikeString + "\n"
+				+ cndtns.weather + "\n");
 		// ----------------------------
 	}
 
@@ -415,14 +421,14 @@ public class ForecastActivity extends Activity {
 			dzien.pop = tmp.getString("pop");
 			this.txtForecast.add(dzien);
 		}
-		
-		int j=1;
+
+		int j = 1;
 		TextView pogoda1 = (TextView) this.findViewById(R.id.pogoda1);
-		
+
 		for (ForecastDay d : this.txtForecast) {
 			Log.i("txtfrcst", d.title + " " + d.fcttextMetric);
-			if(j==1){
-				pogoda1.setText(d.fcttextMetric+"\n");
+			if (j == 1) {
+				pogoda1.setText(d.fcttextMetric + "\n");
 			}
 			j++;
 		}
@@ -494,7 +500,7 @@ public class ForecastActivity extends Activity {
 			this.simpleForecast.add(dzien);
 		}
 
-	//	TextView data2 = (TextView) this.findViewById(R.id.data2);
+		// TextView data2 = (TextView) this.findViewById(R.id.data2);
 		TextView dzisiaj = (TextView) this.findViewById(R.id.data);
 
 		int j = 1;
@@ -505,7 +511,7 @@ public class ForecastActivity extends Activity {
 				dzisiaj.setText("Dzisiaj jest " + d.data.weekDay + ", "
 						+ d.data.day + " " + d.data.monthName + " "
 						+ d.data.year + "\n");
-			//	data2.setText(d.conditions + "\n");
+				// data2.setText(d.conditions + "\n");
 			}
 			j++;
 		}
@@ -563,17 +569,26 @@ public class ForecastActivity extends Activity {
 		return true;
 	}
 
-	public void doSportow(View view){
+	public void doSportow(View view) throws JSONException{
+
+		// JSONObject current_observation =
+		// jObject.getJSONObject("current_observation");
+
 		Intent intent = new Intent(this, Sporty.class);
+		JSONObject current;
+		current = jObject.getJSONObject("current_observation");
+		intent.putExtra("Pogoda", current.toString());
 		startActivity(intent);
 		
+
+		// JSONObject current_observation =
+		// jObject.getJSONObject("current_observation");
+
 	}
-	
-	
-	public void doWypoczynku(View view){
+
+	public void doWypoczynku(View view) {
 		Intent intent = new Intent(this, Wypoczynek.class);
 		startActivity(intent);
-		
-		
+
 	}
 }

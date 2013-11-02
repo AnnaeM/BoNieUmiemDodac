@@ -7,7 +7,11 @@
     <uses-sdk
         android:minSdkVersion="3"
         android:targetSdkVersion="10" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -27,12 +31,20 @@
             android:label="@string/title_activity_forecast" >
         </activity>
         <activity
-            android:name=".Sporty"
+            android:name="com.pogodaandek.Sporty"
             android:label="@string/title_activity_sporty" >
         </activity>
         <activity
-            android:name=".Wypoczynek"
+            android:name="com.pogodaandek.Wypoczynek"
             android:label="@string/title_activity_wypoczynek" >
+        </activity>
+        <activity
+            android:name="com.pogodaandek.GPS"
+            android:label="@string/title_activity_gps" >
+        </activity>
+        <activity
+            android:name="com.pogodaandek.Test"
+            android:label="@string/title_activity_test" >
         </activity>
     </application>
 

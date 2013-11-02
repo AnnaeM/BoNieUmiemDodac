@@ -31,10 +31,17 @@ public class MainActivity extends Activity {
 		// intent
 		startActivity(intent);
 	}
-	/*
-	public void doSportow(View view){
-		Intent intent = new Intent(this, Sporty.class);
+	
+	public void GPS(View view){
+		Intent intent = new Intent(this, GPS.class);
 		startActivity(intent);
 		
-	}*/
+	}
+	
+	public void test(View view){
+		Intent intent = new Intent(this, Test.class);
+		startActivity(intent);
+		
+	}
+	
 }

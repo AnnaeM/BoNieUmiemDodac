@@ -7,5 +7,8 @@
     <string name="title_activity_forecast">ForecastActivity</string>
     <string name="podajM">Podaj miasto</string>
     <string name="title_activity_sporty">SportActivity</string>
-	<string name="title_activity_wypoczynek">WypoczynekActivity</string>
+    <string name="title_activity_wypoczynek">WypoczynekActivity</string>
+    <string name="title_activity_gps">GPS</string>
+    <string name="title_activity_test">Test</string>
+
 </resources>
