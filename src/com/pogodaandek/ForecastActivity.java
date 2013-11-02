@@ -33,7 +33,8 @@ import android.widget.TextView;
 
 public class ForecastActivity extends Activity {
 
-	private static String WEATHER_URL = "http://api.wunderground.com/api/c9d15b10ff3ed303/alerts/conditions/forecast/forecast10day/astronomy/hourly/lang:PL/q/Poland/";
+	//private static String WEATHER_URL = "http://api.wunderground.com/api/c9d15b10ff3ed303/alerts/conditions/forecast/forecast10day/astronomy/hourly/lang:PL/q/Poland/";
+	private static String WEATHER_URL = "http://api.wunderground.com/api/c9d15b10ff3ed303/alerts/conditions/forecast/forecast10day/astronomy/hourly/lang:PL/q/";
 	public String nazwaMiasta;
 	public String json_string_response = null;
 	public Location2 disLoc = null;
@@ -63,8 +64,13 @@ public class ForecastActivity extends Activity {
 
 	public void pobierzPrognoze(String city) {
 		// TODO Auto-generated method stub
-		final String GET_WEATHER_URL = WEATHER_URL + city + ".json";
-
+		
+		final String GET_WEATHER_URL;		
+		if (Character.isDigit(city.charAt(0))){		
+			GET_WEATHER_URL = WEATHER_URL + city + ".json";
+		}
+		else{
+			GET_WEATHER_URL = WEATHER_URL +"Poland/" + city + ".json";}
 		// TODO Auto-generated method stub
 		String request = GET_WEATHER_URL;
 		HttpResponse rp = null;
@@ -336,7 +342,10 @@ public class ForecastActivity extends Activity {
 		disLoc.setLongitude(display_location.getString("longitude"));
 		Log.i("disLoc", disLoc.getLatitude() + " " + disLoc.getLongitude()
 				+ " " + disLoc.getFull());
-
+		
+		TextView tv = (TextView) this.findViewById(R.id.lokacja2TB);
+		tv.setText(display_location.getString("city"));
+		
 		obsLoc = new Location2();
 		JSONObject observation_location = current_observation
 				.getJSONObject("observation_location");

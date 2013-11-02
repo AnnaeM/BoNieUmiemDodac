@@ -18,15 +18,16 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class GPS extends Activity implements LocationListener {
 
-	@Override
+	/*@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gps);
-	}
+	}*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,7 +78,7 @@ public class GPS extends Activity implements LocationListener {
 		    getSystemService(Context.LOCATION_SERVICE);		
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);		
 	    		
-			TextView tekst=(TextView)this.findViewById(R.id.lokacja);
+			//TextView tekst=(TextView)this.findViewById(R.id.lokacja);
 			Location location=null;
 			
 			int i=0;
@@ -92,58 +93,32 @@ public class GPS extends Activity implements LocationListener {
 		    double dlugosc = (double) (location.getLongitude());
 		    
 		    
-		    tekst.setText("D³ugoœæ "+String.valueOf(szerokosc)+"\nSzerokoœæ "+String.valueOf(dlugosc)+"\nPêtla przesz³a "+i+" razy");
-		    
-		    
-		    //trzeba daæ funkcjê odsy³aj¹c¹ do najbli¿szego miasta
-		    
-		    
-		    
-		 /*   Geocoder gcd = new Geocoder(this, Locale.getDefault());
-		    List<Address> addresses = null;
-			try {
-				addresses = gcd.getFromLocation(latitude, longitude, 1);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    if (addresses.size() > 0) 
-		        {Log.i("Lokalizacja",addresses.get(0).getLocality());
-		        
-		       // TextView tekst=(TextView)this.findViewById(R.id.lokacja);
-		        tekst.setText(addresses.get(0).getLocality());
-		        
-		        }
-		    else
-		    	tekst.setText("To wina geocodera!");
-		    }*/
-		  /*  Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
-		    StringBuilder builder = new StringBuilder();
-		    List<Address> address=null;
-		    try {
-		        address = geoCoder.getFromLocation(latitude, longitude, 1);
-		        int maxLines = address.get(0).getMaxAddressLineIndex();
-		        for (int i=0; i<maxLines; i++) {
-		        String addressStr = address.get(0).getAddressLine(i);
-		        builder.append(addressStr);
-		        builder.append(" ");
-		        }
-
-		    String finalAddress = builder.toString(); 
-		    
-	        Log.i("Lokalizacja",finalAddress);
-	        tekst.setText(finalAddress);       
-
-		    } catch (IOException e) {}
-		      catch (NullPointerException e) {}	  
-		    
-		    */
-		    
+		   // tekst.setText("D³ugoœæ "+String.valueOf(szerokosc)+"\nSzerokoœæ "+String.valueOf(dlugosc)+"\nPêtla przesz³a "+i+" razy");
+		    doPogody(dlugosc, szerokosc);
+		   		    
+	
 		}
 		
 		
 	}
 
+	public void doPogody(double dlugosc, double szerokosc){
+		Intent intent = new Intent(this, ForecastActivity.class);	
+		
+		String dl=String.format("%.4f", dlugosc);
+		String szer=String.format("%.4f", szerokosc);
+	
+		dl = dl.replace(',','.');
+		szer = szer.replace(',','.');
+		
+		//String message = String.format("%.4f", dlugosc)+","+String.format("%.4f", szerokosc);
+		String message = szer+","+dl;
+
+		intent.putExtra("Lokacja", message);
+		startActivity(intent);
+		
+	}
+	
 	@Override
 	public void onLocationChanged(Location location) {
 		// TODO Auto-generated method stub
