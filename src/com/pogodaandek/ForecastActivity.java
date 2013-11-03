@@ -234,6 +234,20 @@ public class ForecastActivity extends Activity {
 			}
 
 		}
+		
+		
+		else{
+			TextView tv = (TextView) this.findViewById(R.id.lokacja2TB);
+			TextView data = (TextView) findViewById(R.id.data);
+			
+			Button b1 = (Button)findViewById(R.id.sporty);
+			Button b2 = (Button)findViewById(R.id.wypoczynek);
+			
+			tv.setText("Przepraszamy!");
+			data.setText("Nie uda³o siê po³¹czyæ z serwerem.");
+			b1.setVisibility(View.INVISIBLE);
+			b2.setVisibility(View.INVISIBLE);
+		}
 
 	}
 
@@ -244,12 +258,6 @@ public class ForecastActivity extends Activity {
 		JSONArray hourly = jObject.getJSONArray("hourly_forecast");
 		HourlyForecast hf = new HourlyForecast();
 		this.hourlyForecast = new ArrayList<HourlyForecast>();
-
-		// tu Ania psuje ------------------------------
-		// TextView dzisiaj = (TextView) this.findViewById(R.id.data);
-		// TextView pogoda = (TextView) this.findViewById(R.id.pogoda);
-
-		// -------------------------------------------------
 
 		for (int i = 0; i < hourly.length(); i++) {
 			Log.i("HOURLY " + String.valueOf(i), String.valueOf(i));

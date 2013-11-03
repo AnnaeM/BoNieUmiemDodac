@@ -35,19 +35,19 @@
         android:id="@+id/pogoda1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/pogoda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/astronomy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="" />
 
     <Button
         android:id="@+id/sporty"
