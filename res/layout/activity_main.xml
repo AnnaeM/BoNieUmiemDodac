@@ -60,4 +60,5 @@
         android:onClick="test"
         android:text="Test aktywnosci" />
 
+
 </RelativeLayout>

@@ -230,7 +230,18 @@ public class ForecastActivity extends Activity {
 
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				
+				TextView tv = (TextView) this.findViewById(R.id.lokacja2TB);
+				TextView data = (TextView) findViewById(R.id.data);
+				
+				Button b1 = (Button)findViewById(R.id.sporty);
+				Button b2 = (Button)findViewById(R.id.wypoczynek);
+				
+				tv.setText("Przepraszamy!");
+				data.setText("Nie znaleziono podanego miasta: "+nazwaMiasta);
+				b1.setVisibility(View.INVISIBLE);
+				b2.setVisibility(View.INVISIBLE);
 			}
 
 		}

@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements LocationListener {
 
@@ -98,19 +99,20 @@ public class MainActivity extends Activity implements LocationListener {
 			Location location = null;
 
 			
-			//byæ mo¿e trzeba daæ przynajmniej kilka obrotów pêtli, aby na pewno odœwie¿y³
+	
 			int i = 0;
-			while ((location == null) && (i <= 10)) {
-
+			while ((location == null) && (i <= 100)) {
+			//while (location == null) {
 				locationManager.requestLocationUpdates(
 						LocationManager.GPS_PROVIDER, 0, 0, this);
 				location = locationManager
 						.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				i++;
+
 			}
 
 			//obs³uga b³êdu GPS (czyli to z czym siê tak gryz³am)
-			if (i >= 10) {
+			if (i >= 100) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setTitle("Przepraszamy!")
 						.setMessage("Nie uda³o siê pobraæ danych z GPS.")

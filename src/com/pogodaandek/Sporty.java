@@ -84,12 +84,9 @@ public class Sporty extends ListActivity {
 		JSONObject location = jObject.getJSONObject("display_location");
 		String miasto = location.getString("city");	
 		
-		String dataGodzina = jObject.getString("local_time_rfc822"); // trzeba jeszcze wy³uskaæ
-																		 
-																		 
+		String dataGodzina = jObject.getString("local_time_rfc822"); // trzeba jeszcze wy³uskaæ																 
 		 Double temp = jObject.getDouble("temp_c");
 		// Double tempOdczuwalna = jObject.getDouble("feelslike_c"); //a nu¿ siê przyda
-
 		 String pogoda = jObject.getString("weather");
 		 Double predkoscWiatru = jObject.getDouble("wind_mph");
 
@@ -111,8 +108,13 @@ public class Sporty extends ListActivity {
 		Log.i("Miasto",miasto);
 		Log.i("Dzien tygodnia", dzienTygodnia);
 		Log.i("Dzien", dzien);
+		Log.i("Test",dataGodzina);
 
 		// -----------------------------
+		
+		
+		
+		
 	}
 
 }
