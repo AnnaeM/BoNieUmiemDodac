@@ -33,7 +33,6 @@ import android.widget.TextView;
 
 public class ForecastActivity extends Activity {
 
-	//private static String WEATHER_URL = "http://api.wunderground.com/api/c9d15b10ff3ed303/alerts/conditions/forecast/forecast10day/astronomy/hourly/lang:PL/q/Poland/";
 	private static String WEATHER_URL = "http://api.wunderground.com/api/c9d15b10ff3ed303/alerts/conditions/forecast/forecast10day/astronomy/hourly/lang:PL/q/";
 	public String nazwaMiasta;
 	public String json_string_response = null;
@@ -327,21 +326,7 @@ public class ForecastActivity extends Activity {
 			Log.i(String.valueOf(i), hf.feelslike + " " + hf.czas.monthDay
 					+ " " + hf.czas.toString());
 
-			// i tu --------------------------
-			/*
-			 * if (i == 1) {
-			 * 
-			 * dzisiaj.setText("Dzisiaj jest " +pom.weekDay + ", " +
-			 * pom.monthDay + ". " + pom.month + "\n");
-			 * 
-			 * //
-			 * pogoda.setText("Tajemnicze coœ: "+String.valueOf(hf.feelslike)+
-			 * " "+ // hf.czas.monthDay // + " " + hf.czas.toString());
-			 * 
-			 * }
-			 * 
-			 * // ----------------------
-			 */
+
 		}
 	}
 
@@ -605,7 +590,11 @@ public class ForecastActivity extends Activity {
 		Intent intent = new Intent(this, Sporty.class);
 		JSONObject current;
 		current = jObject.getJSONObject("current_observation");
+		
+		
 		intent.putExtra("Pogoda", current.toString());
+	//	intent.putParcelableArrayListExtra("simpleForecast",(List<ForecastDay>)simpleForecast);
+		
 		startActivity(intent);
 		
 

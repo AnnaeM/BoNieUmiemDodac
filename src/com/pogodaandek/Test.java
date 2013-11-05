@@ -35,8 +35,10 @@ public class Test extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Intent intent = new Intent(this, Sporty.class);
 		intent.putExtra("Pogoda", testowy.toString());
+		
 		startActivity(intent);
 
 	}
@@ -82,7 +84,7 @@ public class Test extends Activity {
 		String nazwa;
 		switch (mies) {
 
-		case 1: {
+		case 1:{
 			nazwa = "Jan";
 			break;
 		}
