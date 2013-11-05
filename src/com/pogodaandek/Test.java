@@ -55,26 +55,35 @@ public class Test extends Activity {
 		EditText miesiac = (EditText) findViewById(R.id.miesiac);
 		EditText rok = (EditText) findViewById(R.id.rok);
 		EditText godzina = (EditText) findViewById(R.id.godzina);
+		EditText minuty = (EditText) findViewById(R.id.minuty);
 
-		JSONObject display_location = new JSONObject();
-
-		display_location.put("city", miasto.getText().toString());
-		testowy.put("display_location", display_location); 
+		
+		testowy.put("city", miasto.getText().toString());
 
 		// String message = "Mon, 11 Nov 2014 12:00:00 +0100"; 
-
+/*
 		int nrMiesiaca = Integer.parseInt(miesiac.getText().toString());
 		String month = miesiace(nrMiesiaca);
 		String message = dzienTygodnia.getText().toString() + ", "
 				+ dzien.getText().toString() + " " + month + " "
 				+ rok.getText().toString() + " " + godzina.getText().toString()
 				+ " +0100";
-
-		testowy.put("local_time_rfc822", message);	
-		testowy.put("weather", pogoda.getText().toString());
-		testowy.put("temp_c", temp.getText());
-		testowy.put("wind_mph", wiatr.getText());
+*/
+		
+		
+		testowy.put("day", dzien.getText());
+		testowy.put("month", miesiac.getText());
+		testowy.put("hour", godzina.getText());
+		testowy.put("min", minuty.getText());
+		testowy.put("weekDay", dzienTygodnia.getText().toString());
+		testowy.put("city", miasto.getText().toString());
+		testowy.put("latitude", "51.22000122");
+		testowy.put("longitude","22.39999962");
 		testowy.put("feelslike_c", temp.getText());
+		testowy.put("weather", pogoda.getText().toString());
+		testowy.put("wind_mph", wiatr.getText());
+
+		
 
 
 	}

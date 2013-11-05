@@ -19,6 +19,11 @@ import android.widget.AdapterView.OnItemClickListener;
 public class Sporty extends ListActivity {
 
 	public JSONObject jObject;
+	String dzienTygodnia;
+	Double temp;
+	String miasto;
+	int miesiac;
+	//String dataGodzina;
 
 	// String listArray[];
 	String listArray[] = { "Bieganie", "P³ywanie", "Jazda na rowerze", "£y¿wy",
@@ -77,157 +82,181 @@ public class Sporty extends ListActivity {
 
 	public void wyborSportow(JSONObject jObject) throws JSONException {
 
-		JSONObject location = jObject.getJSONObject("display_location");
-		String miasto = location.getString("city");
-
-		String dataGodzina = jObject.getString("local_time_rfc822"); // trzeba
-																		// jeszcze
-																		// wy³uskaæ
-		// Double temp = jObject.getDouble("temp_c");
-		Double tempOdczuwalna = jObject.getDouble("feelslike_c"); // a nu¿ siê
-																	// przyda
+		miasto = jObject.getString("city");
+		temp = jObject.getDouble("feelslike_c"); // temp odczuwalna																
 		String pogoda = jObject.getString("weather");
-		Double predkoscWiatru = jObject.getDouble("wind_mph");
+			
+		Log.i("Test", jObject.toString());
 
-		// tniemy dataGodzina ------------------------
 
-		// Sat, 02 Nov 2013 08:32:38 +0100
-		String dzienTygodnia = "";
+		// -----------------------------
+
+		//int samaGodzina = Integer.parseInt(samaGodzinaString);
+		char poraDnia = poraDnia(jObject.getInt("hour"));
+
+		dzienTygodnia = jObject.getString("weekDay");
+
+		int pogodaInt = pogodaNaInt(pogoda);
+		switch (pogodaInt) {
+		case 1: {	//pogodnie
+			ladnaPogoda(poraDnia);	
+			break;
+		}
+		case 2: {	//przewaga chmur
+
+			break;
+		}
+		case 3: {	//ob³oki zanikaj¹ce
+
+			break;
+		}
+		case 4: {	//œnieg
+
+			break;
+		}
+		case 5: {	//niewielkie zachmurzenie
+
+			break;
+		}
+		case 6: {	//deszcz
+
+			break;
+		}
+		case 7: {	//lekki deszcz
+
+			break;
+		}
+		case 8: {	//pochmurno
+
+			break;
+		}
+		case 9: {	//p³atki mg³y
+
+			break;
+		}
+		case 10: {	//lekkie przelotne deszcze
+
+			break;
+		}
+
+		}
+
+	}
+
+	public void dataGodzina(){
+		
+	// tniemy dataGodzina ------------------------
+
+	// Sat, 02 Nov 2013 08:32:38 +0100
+	/*	String dzienTygodnia = "";
 
 		int i = 0;
 		do {
 			dzienTygodnia = dzienTygodnia + dataGodzina.charAt(i);
 			i++;
-		} while (dataGodzina.charAt(i) != ',');
+		} while (dataGodzina.charAt(i) != ',');*/
 
-		String dzien = String.valueOf(dataGodzina.charAt(5));
-		dzien = dzien + dataGodzina.charAt(6);
-
-		Log.i("Miasto", miasto);
-		Log.i("Dzien tygodnia", dzienTygodnia);
-		Log.i("Dzien", dzien);
-		Log.i("Test", dataGodzina);
-
-		String samaGodzinaString = String.valueOf(dataGodzina.charAt(17));
-		samaGodzinaString = samaGodzinaString + dataGodzina.charAt(18);
-
-		// -----------------------------
-
-		int samaGodzina = Integer.parseInt(samaGodzinaString);
-		String poraDnia = poraDnia(samaGodzina);
-
-		JSONObject pom1 = jObject.getJSONObject("forecast");
-		JSONArray pom2 = pom1.getJSONArray("forecastday");
-		JSONObject tmp = pom2.getJSONObject(0);
-		String dzienTygodnia2 = tmp.getString("title");
-
-		switch (pogoda) {
-		case "pogodnie": {
-
-			switch (poraDnia) {
-			case "wczesny ranek": {
-				if ((dzienTygodnia2 == "Poniedzia³ek")
-						|| (dzienTygodnia2 == "Wtorek")
-						|| (dzienTygodnia2 == "Œroda")
-						|| (dzienTygodnia2 == "Czwartek")
-						|| (dzienTygodnia2 == "Pi¹tek")) {
-
-				}
+		//String dzien = String.valueOf(dataGodzina.charAt(5));
+		//dzien = dzien + dataGodzina.charAt(6);
 				
-				else if (dzienTygodnia2=="Sobota"){
-					
-				}
-				else{	//niedziela
-					
-				}
-
-
-				break;
-			}
-			case "ranek": {
-				break;
-			}
-			case "dzieñ": {
-				break;
-			}
-			case "popo³udnie": {
-				break;
-			}
-			case "wieczór": {
-				break;
-			}
-			case "noc": {
-				break;
-			}
-			case "g³êboka noc": {
-				break;
-			}
-
-			}
-
-			break;
-		}
-		case "przewaga chmur": {
-
-			break;
-		}
-		case "ob³oki zanikaj¹ce": {
-
-			break;
-		}
-		case "œnieg": {
-
-			break;
-		}
-		case "niewielkie zachmurzenie": {
-
-			break;
-		}
-		case "deszcz": {
-
-			break;
-		}
-		case "lekki deszcz": {
-
-			break;
-		}
-		case "pochmurno": {
-
-			break;
-		}
-		case "p³atki mg³y": {
-
-			break;
-		}
-		case "lekkie przelotne deszcze": {
-
-			break;
-		}
-
-		}
-
+	//	String miesiacStr = String.valueOf(dataGodzina.charAt(8));
+	//	miesiacStr = miesiacStr + dataGodzina.charAt(9) + dataGodzina.charAt(10);
+		
 	}
+	public char poraDnia(int godzina) {
 
-	public String poraDnia(int godzina) {
-
-		String pora;
+		char pora;
 
 		if ((godzina >= 6) && (godzina < 10))
-			pora = "wczesny ranek";
+			pora = 	'm';	//"wczesny ranek";(morning)
 		else if ((godzina >= 11) && (godzina < 13))
-			pora = "ranek";
+			pora = 'r';			//"ranek";	
 		else if ((godzina >= 11) && (godzina < 13))
-			pora = "dzieñ";
+			pora = 'd';		//"dzieñ";
 		else if ((godzina >= 14) && (godzina < 17))
-			pora = "popo³udnie";
+			pora = 'p';		//"popo³udnie";
 		else if ((godzina >= 18) && (godzina < 21))
-			pora = "wieczór";
+			pora = 	'w';	//"wieczór";
 		else if ((godzina >= 22) && (godzina < 1))
-			pora = "noc";
+			pora = 'n';	//"noc";
 		else
-			pora = "g³êboka noc";
+			pora ='g';	//"g³êboka noc";
 
 		return pora;
 	}
 
+	public int pogodaNaInt(String pogoda){
+		//pierwsza wersja:boPogodaMusiBycInt(foch)
+		int i;
+		
+		if(pogoda=="pogodnie")
+			i=1;
+		else if (pogoda=="przewaga chmur")
+			i=2;
+		else if (pogoda=="ob³oki zanikaj¹ce")
+			i=3;
+		else if (pogoda=="œnieg")
+			i=4;
+		else if (pogoda=="niewielkie zachmurzenie")
+			i=5;
+		else if (pogoda=="deszcz")
+			i=6;
+		else if (pogoda=="lekki deszcz")
+			i=7;
+		else if (pogoda=="pochmurno")
+			i=8;
+		else if (pogoda=="p³atki mg³y")
+			i=9;
+		else if (pogoda=="lekkie przelotne deszcze ")
+			i=10;
+		else
+			i=0;
+		return i;
+	}
+	
+	
+	public void ladnaPogoda(char poraDnia){
+		
+		switch (poraDnia) {
+		case 'm': {
+			if ((dzienTygodnia == "Poniedzia³ek")|| (dzienTygodnia == "Wtorek")|| (dzienTygodnia == "Œroda")
+					|| (dzienTygodnia == "Czwartek")|| (dzienTygodnia == "Pi¹tek")) {
+				
+			//	naTygodniu();
+				
+				
+			}
+
+			else if (dzienTygodnia == "Sobota") {
+
+			} else { // niedziela
+
+			}
+
+			break;
+		}
+		case 'r': {
+			break;
+		}
+		case 'd': {
+			break;
+		}
+		case 'p': {
+			break;
+		}
+		case 'w': {
+			break;
+		}
+		case 'n': {
+			break;
+		}
+		case 'g': {
+			break;
+		}
+
+		}
+		
+		
+	}
+	
 }

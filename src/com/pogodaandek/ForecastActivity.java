@@ -45,6 +45,7 @@ public class ForecastActivity extends Activity {
 	public List<ForecastDay> txt10day;
 	public List<ForecastDay> simple10day;
 	public JSONObject jObject;
+	public JSONObject doAktywnosci = new JSONObject();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -221,6 +222,15 @@ public class ForecastActivity extends Activity {
 					pom3 = tmp.getJSONObject("snow_allday");
 					dzien.snowAllDay = pom3.getString("cm");
 					this.simple10day.add(dzien);
+					
+					if (i==0){
+						doAktywnosci.put("day", Integer.parseInt(data.day));
+						doAktywnosci.put("month", Integer.parseInt(data.month));
+						doAktywnosci.put("hour",Integer.parseInt(data.hour));
+						doAktywnosci.put("min",Integer.parseInt(data.min));
+						doAktywnosci.put("weekDay", data.weekDay);
+						
+					}
 				}
 				for (ForecastDay d : this.simpleForecast) {
 					Log.i("10DAYS!!! " + d.data.day, d.data.pretty + " "
@@ -347,6 +357,7 @@ public class ForecastActivity extends Activity {
 		Log.i("disLoc", disLoc.getLatitude() + " " + disLoc.getLongitude()
 				+ " " + disLoc.getFull());
 		
+		
 		TextView tv = (TextView) this.findViewById(R.id.lokacja2TB);
 		tv.setText(display_location.getString("city"));
 		
@@ -413,6 +424,15 @@ public class ForecastActivity extends Activity {
 		pogoda.setText("W tej chwili:\n" + cndtns.feelslikeString + "\n"
 				+ cndtns.weather + "\n");
 		// ----------------------------
+		
+
+		doAktywnosci.put("city",display_location.getString("city"));
+		doAktywnosci.put("latitude", display_location.getString("latitude"));
+		doAktywnosci.put("longitude", display_location.getString("longitude"));
+		doAktywnosci.put("feelslike_c", Double.valueOf(current_observation.getString("feelslike_c")));
+		doAktywnosci.put("weather", current_observation.getString("weather"));
+		doAktywnosci.put("wind_mph", current_observation.getString("wind_mph"));
+		
 	}
 
 	private void obrabianieTxtForecast(JSONObject forecast)
@@ -584,15 +604,13 @@ public class ForecastActivity extends Activity {
 
 	public void doSportow(View view) throws JSONException{
 
-		// JSONObject current_observation =
-		// jObject.getJSONObject("current_observation");
 
 		Intent intent = new Intent(this, Sporty.class);
-		JSONObject current;
-		current = jObject.getJSONObject("current_observation");
+		//JSONObject current;
+	//	current = jObject.getJSONObject("current_observation");
+			
 		
-		
-		intent.putExtra("Pogoda", current.toString());
+		intent.putExtra("Pogoda", doAktywnosci.toString());
 	//	intent.putParcelableArrayListExtra("simpleForecast",(List<ForecastDay>)simpleForecast);
 		
 		startActivity(intent);

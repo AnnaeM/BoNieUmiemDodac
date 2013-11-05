@@ -68,43 +68,42 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_alignLeft="@+id/wiatr"
+        android:layout_alignRight="@+id/wiatr"
         android:layout_below="@+id/wiatr"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:text="Mon"  />
+        android:text="Poniedziałek" />
 
     <EditText
         android:id="@+id/dzien"
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/dzienTygodnia"
         android:layout_below="@+id/dzienTygodnia"
         android:ems="10"
         android:hint="Data"
         android:inputType="number" />
+    
 
     <EditText
-        android:id="@+id/miesiac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/dzien"
-        android:layout_alignRight="@+id/sporty"
-        android:layout_below="@+id/dzienTygodnia"
-        android:layout_toRightOf="@+id/dzienTygodnia"
-        android:ems="10"
-        android:inputType="number" />
-
-   <EditText
         android:id="@+id/rok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/miesiac"
-        android:layout_alignRight="@+id/godzina"
-        android:layout_alignTop="@+id/miesiac"
-        android:layout_toRightOf="@+id/miesiac"
+        android:layout_alignRight="@+id/dzienTygodnia"
+        android:layout_below="@+id/dzienTygodnia"
+        android:layout_toRightOf="@+id/sporty"
         android:ems="10"
-        android:text="2013"
+        android:inputType="number"
+        android:text="2013" />
+
+    <EditText
+        android:id="@+id/miesiac"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/godzina"
+        android:layout_alignTop="@+id/rok"
+        android:layout_toLeftOf="@+id/rok"
+        android:ems="10"
         android:inputType="number" />
     
     <EditText
@@ -113,10 +112,21 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/dzien"
         android:layout_below="@+id/dzien"
-        android:text="12:00:00"
-        android:ems="10" />
+        android:layout_toLeftOf="@+id/miesiac"
+        android:ems="10"
+        android:text="12"
+        android:inputType="number" />
 
-    
+    <EditText
+        android:id="@+id/minuty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/miesiac"
+        android:layout_below="@+id/dzien"
+        android:layout_toRightOf="@+id/dzien"
+        android:ems="10"
+        android:inputType="number"
+        android:text="00" />
 
 </RelativeLayout>
 
