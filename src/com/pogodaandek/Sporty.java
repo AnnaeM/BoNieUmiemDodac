@@ -1,5 +1,7 @@
 package com.pogodaandek;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,10 +25,13 @@ public class Sporty extends ListActivity {
 	Double temp;
 	String miasto;
 	int miesiac;
-	//String dataGodzina;
+	int godzina;
+	String pogoda;
+	//String listArray[]=null;
+	ArrayList<String> listArray = new ArrayList<String>();
 
 	// String listArray[];
-	String listArray[] = { "Bieganie", "P³ywanie", "Jazda na rowerze", "£y¿wy",
+	/*String listArray[] = { "Bieganie", "P³ywanie", "Jazda na rowerze", "£y¿wy",
 			"Narciarstwo", "Pi³ka siatkowa", "Koszykówka", "Pi³ka no¿na",
 			"Badminton", "Tenis", "Squash", "Joga", "Wyjœcie na si³owniê",
 			"¯eglarstwo", "Nordic walking", "Trekking", "Serfowanie",
@@ -38,7 +43,7 @@ public class Sporty extends ListActivity {
 			"Jazda konna", "Wspinaczka", "Ping-pong", "Trening sztuk walki",
 			"Narty wodne", "Polowanie", "Lot balonem", "Pi³ka wodna",
 			"Paintball" };
-
+*/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -84,86 +89,47 @@ public class Sporty extends ListActivity {
 
 		miasto = jObject.getString("city");
 		temp = jObject.getDouble("feelslike_c"); // temp odczuwalna																
-		String pogoda = jObject.getString("weather");
-			
+		pogoda = jObject.getString("weather");
+		//miesiac = jObject.getInt("month");
+		String m = jObject.getString("month");
+		miesiac = Integer.parseInt(m);
+		
+		godzina = jObject.getInt("hour");
+		dzienTygodnia = jObject.getString("weekDay");
+		
 		Log.i("Test", jObject.toString());
 
-
-		// -----------------------------
-
-		//int samaGodzina = Integer.parseInt(samaGodzinaString);
-		char poraDnia = poraDnia(jObject.getInt("hour"));
-
-		dzienTygodnia = jObject.getString("weekDay");
-
-		int pogodaInt = pogodaNaInt(pogoda);
-		switch (pogodaInt) {
-		case 1: {	//pogodnie
-			ladnaPogoda(poraDnia);	
-			break;
-		}
-		case 2: {	//przewaga chmur
-
-			break;
-		}
-		case 3: {	//ob³oki zanikaj¹ce
-
-			break;
-		}
-		case 4: {	//œnieg
-
-			break;
-		}
-		case 5: {	//niewielkie zachmurzenie
-
-			break;
-		}
-		case 6: {	//deszcz
-
-			break;
-		}
-		case 7: {	//lekki deszcz
-
-			break;
-		}
-		case 8: {	//pochmurno
-
-			break;
-		}
-		case 9: {	//p³atki mg³y
-
-			break;
-		}
-		case 10: {	//lekkie przelotne deszcze
-
-			break;
-		}
-
-		}
+		char poraDnia = poraDnia();
+			
+		int i;
+		if(pogoda.equals("pogodnie"))
+			{Log.i("Info","Pogodnie");
+			ladnaPogoda(poraDnia);}
+		else if (pogoda.equals("przewaga chmur"))
+			i=2;
+		else if (pogoda.equals("ob³oki zanikaj¹ce"))
+			i=3;
+		else if (pogoda.equals("œnieg"))
+			i=4;
+		else if (pogoda.equals("niewielkie zachmurzenie"))
+			i=5;
+		else if (pogoda.equals("deszcz"))
+			i=6;
+		else if (pogoda.equals("lekki deszcz"))
+			i=7;
+		else if (pogoda.equals("pochmurno"))
+			i=8;
+		else if (pogoda.equals("p³atki mg³y"))
+			i=9;
+		else if (pogoda.equals("lekkie przelotne deszcze "))
+			i=10;
+		else
+			i=0;
 
 	}
 
-	public void dataGodzina(){
-		
-	// tniemy dataGodzina ------------------------
 
-	// Sat, 02 Nov 2013 08:32:38 +0100
-	/*	String dzienTygodnia = "";
-
-		int i = 0;
-		do {
-			dzienTygodnia = dzienTygodnia + dataGodzina.charAt(i);
-			i++;
-		} while (dataGodzina.charAt(i) != ',');*/
-
-		//String dzien = String.valueOf(dataGodzina.charAt(5));
-		//dzien = dzien + dataGodzina.charAt(6);
-				
-	//	String miesiacStr = String.valueOf(dataGodzina.charAt(8));
-	//	miesiacStr = miesiacStr + dataGodzina.charAt(9) + dataGodzina.charAt(10);
-		
-	}
-	public char poraDnia(int godzina) {
+	public char poraDnia() {
 
 		char pora;
 
@@ -185,77 +151,100 @@ public class Sporty extends ListActivity {
 		return pora;
 	}
 
-	public int pogodaNaInt(String pogoda){
-		//pierwsza wersja:boPogodaMusiBycInt(foch)
-		int i;
-		
-		if(pogoda=="pogodnie")
-			i=1;
-		else if (pogoda=="przewaga chmur")
-			i=2;
-		else if (pogoda=="ob³oki zanikaj¹ce")
-			i=3;
-		else if (pogoda=="œnieg")
-			i=4;
-		else if (pogoda=="niewielkie zachmurzenie")
-			i=5;
-		else if (pogoda=="deszcz")
-			i=6;
-		else if (pogoda=="lekki deszcz")
-			i=7;
-		else if (pogoda=="pochmurno")
-			i=8;
-		else if (pogoda=="p³atki mg³y")
-			i=9;
-		else if (pogoda=="lekkie przelotne deszcze ")
-			i=10;
-		else
-			i=0;
-		return i;
-	}
-	
-	
 	public void ladnaPogoda(char poraDnia){
+
+		char poraRoku = poraRoku();
 		
-		switch (poraDnia) {
-		case 'm': {
-			if ((dzienTygodnia == "Poniedzia³ek")|| (dzienTygodnia == "Wtorek")|| (dzienTygodnia == "Œroda")
-					|| (dzienTygodnia == "Czwartek")|| (dzienTygodnia == "Pi¹tek")) {
+		switch (poraRoku){
+		case 'w':{
+			//wiosna
+			switch (poraDnia) {
+			case 'm': {
+				if ((dzienTygodnia.equals("Poniedzia³ek"))|| (dzienTygodnia.equals("Wtorek"))|| (dzienTygodnia.equals("Œroda"))
+						|| (dzienTygodnia.equals("Czwartek"))|| (dzienTygodnia.equals("Pi¹tek"))) {
 				
-			//	naTygodniu();
+					//jest ladna pogoda, wiosna, wczesny ranek i na tygodniu
+					
+					if(temp<10){
+						listArray.add("Bieganie");
+						listArray.add("Rower");
+						listArray.add("Joga");
+						
+					}
+					
+					
+				}
+
+				else if (dzienTygodnia == "Sobota") {
+					//jest ladna pogoda, wiosna, wczesny ranek i sobota	
 				
-				
+				} else { // jest ladna pogoda, wiosna, wczesny ranek i niedziela
+
+				}
+
+				break;
+			}
+			case 'r': {
+				break;
+			}
+			case 'd': {
+				break;
+			}
+			case 'p': {
+				break;
+			}
+			case 'w': {
+				break;
+			}
+			case 'n': {
+				break;
+			}
+			case 'g': {
+				break;
+			}
+			default:{
+				Log.i("Info","nie ma poryDnia");
 			}
 
-			else if (dzienTygodnia == "Sobota") {
-
-			} else { // niedziela
-
 			}
-
+			
 			break;
 		}
-		case 'r': {
+		case 'l':{//lato		
 			break;
 		}
-		case 'd': {
+		case 'j':{	//jesien
 			break;
 		}
-		case 'p': {
+		case 'z':{	//zima
 			break;
 		}
-		case 'w': {
-			break;
-		}
-		case 'n': {
-			break;
-		}
-		case 'g': {
-			break;
-		}
-
+		default:{
+			
 		}
 		
+		}
+		}
+		
+	
+	public char poraRoku(){
+		
+		//mo¿na dodaæ np. przedwioœnie
+		char c;
+		
+		if((miesiac==4)||(miesiac==5)){	//kwiecien-maj
+			c='w';
+		}
+		else if((miesiac>=6)&&(miesiac<=8)){	//czerwiec-sierpien
+			c='l';
+		}
+		else if((miesiac>=9)&&(miesiac<=11)){	//wrzesien-list
+			c='j';
+		}
+		else	//grudzien-marzec
+			{c='z';}
+		
+		return c;
 		
 	}
 	
