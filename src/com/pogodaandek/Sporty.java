@@ -134,13 +134,13 @@ public class Sporty extends ListActivity {
 		char pora;
 
 		if ((godzina >= 6) && (godzina < 10))
-			pora = 	'm';	//"wczesny ranek";(morning)
+			pora = 	'r';	//ranek
 		else if ((godzina >= 11) && (godzina < 13))
-			pora = 'r';			//"ranek";	
+			pora = 'p';			//"poludnie";	
 		else if ((godzina >= 11) && (godzina < 13))
 			pora = 'd';		//"dzieñ";
 		else if ((godzina >= 14) && (godzina < 17))
-			pora = 'p';		//"popo³udnie";
+			pora = 'o';		//"popo³udnie";
 		else if ((godzina >= 18) && (godzina < 21))
 			pora = 	'w';	//"wieczór";
 		else if ((godzina >= 22) && (godzina < 1))
@@ -159,38 +159,81 @@ public class Sporty extends ListActivity {
 		case 'w':{
 			//wiosna
 			switch (poraDnia) {
-			case 'm': {
-				if ((dzienTygodnia.equals("Poniedzia³ek"))|| (dzienTygodnia.equals("Wtorek"))|| (dzienTygodnia.equals("Œroda"))
-						|| (dzienTygodnia.equals("Czwartek"))|| (dzienTygodnia.equals("Pi¹tek"))) {
+			case 'r': {
 				
-					//jest ladna pogoda, wiosna, wczesny ranek i na tygodniu
-					
-					if(temp<10){
+					//jest ladna pogoda, wiosna, ranek, dowolny dzieñ tygodnia (bo rano i tak wszystko zamkniête)
+										
+					if((temp>0)&&(temp<25)){
 						listArray.add("Bieganie");
 						listArray.add("Rower");
 						listArray.add("Joga");
-						
+						listArray.add("Nordic walking");
+						listArray.add("Jazda na rolkach");
+						listArray.add("Jazda na deskorolce");
+						listArray.add("Parkour");
 					}
 					
-					
-				}
-
-				else if (dzienTygodnia == "Sobota") {
-					//jest ladna pogoda, wiosna, wczesny ranek i sobota	
+					else
+						listArray.add("Zostañ w domu");
 				
-				} else { // jest ladna pogoda, wiosna, wczesny ranek i niedziela
-
-				}
-
 				break;
 			}
-			case 'r': {
+		
+			case 'p': {
+				
+				if ((dzienTygodnia.equals("Poniedzia³ek"))|| (dzienTygodnia.equals("Wtorek"))|| (dzienTygodnia.equals("Œroda"))
+						|| (dzienTygodnia.equals("Czwartek"))||(dzienTygodnia.equals("Pi¹tek"))||(dzienTygodnia.equals("Sobota"))) {
+					
+					//jest ladna pogoda, wiosna, po³udnie, na tygodniu + sobota
+					if ((temp>5)&&(temp<35)){
+						listArray.add("Bieganie");
+						listArray.add("Rower");
+						listArray.add("Joga");
+						listArray.add("Nordic walking");
+						listArray.add("Jazda na rolkach");
+						listArray.add("Jazda na deskorolce");
+						listArray.add("Parkour");
+						listArray.add("Pi³ka siatkowa");
+						listArray.add("Koszykówka");
+						listArray.add("Badminton");
+						listArray.add("Tenis");
+						listArray.add("Squash");
+						listArray.add("Wyjœcie na si³owniê");
+						listArray.add("Jazda na bmx");
+						listArray.add("Jazda na quadzie");
+						listArray.add("Wyjœcie na cardy");
+						listArray.add("Golf");
+						listArray.add("Szermierka");
+						listArray.add("£ucznictwo");
+						listArray.add("Wyjœcie na strzelnicê");
+						listArray.add("Jazda konna");
+						listArray.add("Œciana wspinaczkowa");
+						listArray.add("Trening sztuk walki");
+						listArray.add("Paintball");
+					}
+					
+					else 
+						listArray.add("Zostañ w domu");				
+				}
+				
+				else{
+					
+					//jest ladna pogoda, wiosna, po³udnie, niedziela
+					listArray.add("Bieganie");
+					listArray.add("Rower");
+					listArray.add("Joga");
+					listArray.add("Nordic walking");
+					listArray.add("Jazda na rolkach");
+					listArray.add("Jazda na deskorolce");
+					listArray.add("Parkour");
+				}
+					
 				break;
 			}
 			case 'd': {
 				break;
 			}
-			case 'p': {
+			case 'o': {
 				break;
 			}
 			case 'w': {
