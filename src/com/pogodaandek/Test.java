@@ -42,6 +42,22 @@ public class Test extends Activity {
 		startActivity(intent);
 
 	}
+	
+	public void ubrania(View view){
+		
+		try {
+			wlozDane();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Intent intent = new Intent(this, Ubrania.class);
+		intent.putExtra("Pogoda", testowy.toString());
+		
+		startActivity(intent);
+		
+	}
 
 	public void wlozDane() throws JSONException {
 
@@ -60,16 +76,7 @@ public class Test extends Activity {
 		
 		testowy.put("city", miasto.getText().toString());
 
-		// String message = "Mon, 11 Nov 2014 12:00:00 +0100"; 
-/*
-		int nrMiesiaca = Integer.parseInt(miesiac.getText().toString());
-		String month = miesiace(nrMiesiaca);
-		String message = dzienTygodnia.getText().toString() + ", "
-				+ dzien.getText().toString() + " " + month + " "
-				+ rok.getText().toString() + " " + godzina.getText().toString()
-				+ " +0100";
-*/
-		
+		// String message = "Mon, 11 Nov 2014 12:00:00 +0100"; 	
 		
 		testowy.put("day", dzien.getText());
 		testowy.put("month", miesiac.getText());
@@ -81,74 +88,17 @@ public class Test extends Activity {
 		testowy.put("longitude","22.39999962");
 		testowy.put("feelslike_c", temp.getText());
 		testowy.put("weather", pogoda.getText().toString());
-		testowy.put("wind_mph", wiatr.getText());
-
 		
+		if(wiatr.getText()==null){
+			testowy.put("wind_mph", 0);
+		}
+		else
+			testowy.put("wind_mph", wiatr.getText());
 
 
 	}
 
-	public String miesiace(int mies) {
-
-		String nazwa;
-		switch (mies) {
-
-		case 1:{
-			nazwa = "Jan";
-			break;
-		}
-		case 2: {
-			nazwa = "Feb";
-			break;
-		}
-		case 3: {
-			nazwa = "Mar";
-			break;
-		}
-		case 4: {
-			nazwa = "Apr";
-			break;
-		}
-		case 5: {
-			nazwa = "May";
-			break;
-		}
-		case 6: {
-			nazwa = "Jun";
-			break;
-		}
-		case 7: {
-			nazwa = "Jul";
-			break;
-		}
-		case 8: {
-			nazwa = "Aug";
-			break;
-		}
-		case 9: {
-			nazwa = "Sept";
-			break;
-		}
-		case 10: {
-			nazwa = "Oct";
-			break;
-		}
-		case 11: {
-			nazwa = "Nov";
-			break;
-		}
-		case 12: {
-			nazwa = "Dec";
-			break;
-		}
-
-		default: {
-			nazwa = "Brak";
-		}
-		}
-
-		return nazwa;
-	}
+	
 
 	
 }

@@ -603,27 +603,20 @@ public class ForecastActivity extends Activity {
 	}
 
 	public void doSportow(View view) throws JSONException{
-
-
 		Intent intent = new Intent(this, Sporty.class);
-		//JSONObject current;
-	//	current = jObject.getJSONObject("current_observation");
-			
-		
 		intent.putExtra("Pogoda", doAktywnosci.toString());
-	//	intent.putParcelableArrayListExtra("simpleForecast",(List<ForecastDay>)simpleForecast);
-		
-		startActivity(intent);
-		
-
-		// JSONObject current_observation =
-		// jObject.getJSONObject("current_observation");
-
+		startActivity(intent);	
 	}
 
 	public void doWypoczynku(View view) {
 		Intent intent = new Intent(this, Wypoczynek.class);
 		startActivity(intent);
 
+	}
+	
+	public void doUbran(View view) throws JSONException{
+		Intent intent = new Intent(this, Ubrania.class);
+		intent.putExtra("Pogoda", doAktywnosci.toString());
+		startActivity(intent);	
 	}
 }

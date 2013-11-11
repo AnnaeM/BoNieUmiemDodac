@@ -27,10 +27,8 @@ public class Sporty extends ListActivity {
 	int miesiac;
 	int godzina;
 	String pogoda;
-	// String listArray[]=null;
 	ArrayList<String> listArray = new ArrayList<String>();
 
-	// String listArray[];
 	/*
 	 * String listArray[] = { "Bieganie", "P³ywanie", "Jazda na rowerze",
 	 * "£y¿wy", "Narciarstwo", "Pi³ka siatkowa", "Koszykówka", "Pi³ka no¿na",
@@ -61,6 +59,17 @@ public class Sporty extends ListActivity {
 
 		try {
 			jObject = new JSONObject(getIntent().getStringExtra("Pogoda"));
+			
+			miasto = jObject.getString("city");
+			temp = jObject.getDouble("feelslike_c"); // temp odczuwalna
+			pogoda = jObject.getString("weather");
+			// miesiac = jObject.getInt("month");
+			String m = jObject.getString("month");
+			miesiac = Integer.parseInt(m);
+
+			godzina = jObject.getInt("hour");
+			dzienTygodnia = jObject.getString("weekDay");
+
 			wyborSportow(jObject);
 
 		} catch (JSONException e) {
@@ -89,46 +98,48 @@ public class Sporty extends ListActivity {
 
 	}
 
-	public void wyborSportow(JSONObject jObject) throws JSONException {
+	public void wyborSportow(JSONObject jObject){
 
-		miasto = jObject.getString("city");
-		temp = jObject.getDouble("feelslike_c"); // temp odczuwalna
-		pogoda = jObject.getString("weather");
-		// miesiac = jObject.getInt("month");
-		String m = jObject.getString("month");
-		miesiac = Integer.parseInt(m);
-
-		godzina = jObject.getInt("hour");
-		dzienTygodnia = jObject.getString("weekDay");
-
+		
 		Log.i("Test", jObject.toString());
 
 		char poraDnia = poraDnia();
 
 		int i;
 		if (pogoda.equals("pogodnie")) {
-			Log.i("Info", "Pogodnie");
 			ladnaPogoda(poraDnia);
 		} else if (pogoda.equals("przewaga chmur"))
-			i = 2;
+			ladnaPogoda(poraDnia);
 		else if (pogoda.equals("ob³oki zanikaj¹ce"))
-			i = 3;
+			ladnaPogoda(poraDnia);
 		else if (pogoda.equals("œnieg"))
-			i = 4;
+			deszczowaPogoda(poraDnia);
 		else if (pogoda.equals("niewielkie zachmurzenie"))
-			i = 5;
+			ladnaPogoda(poraDnia);
 		else if (pogoda.equals("deszcz"))
-			i = 6;
+			deszczowaPogoda(poraDnia);
 		else if (pogoda.equals("lekki deszcz"))
-			i = 7;
+			deszczowaPogoda(poraDnia);
 		else if (pogoda.equals("pochmurno"))
-			i = 8;
+			ladnaPogoda(poraDnia);
 		else if (pogoda.equals("p³atki mg³y"))
-			i = 9;
-		else if (pogoda.equals("lekkie przelotne deszcze "))
-			i = 10;
+			ladnaPogoda(poraDnia);
+		else if (pogoda.equals("lekkie przelotne deszcze"))
+			deszczowaPogoda(poraDnia);
+		else if(pogoda.equals("lekka m¿awka"))	
+			ladnaPogoda(poraDnia);
+		else if(pogoda.equals("zamglenia"))
+			ladnaPogoda(poraDnia);
+		else if(pogoda.equals("m¿awka"))
+			deszczowaPogoda(poraDnia);
+		else if(pogoda.equals("mg³a"))
+			ladnaPogoda(poraDnia);
+		else if(pogoda.equals("lekka mg³a"))
+			ladnaPogoda(poraDnia);
+		else if(pogoda.equals("czêœciowe zamglenia"))
+			ladnaPogoda(poraDnia);
 		else
-			i = 0;
+			listArray.add("Nieznany rodzaj pogody");
 
 	}
 
@@ -389,6 +400,7 @@ public class Sporty extends ListActivity {
 				if ((temp >= -15) && (temp <= 20)) {
 					bieganie();
 					standardowe();
+					listArray.add("Sanki");
 				}
 
 				break;
@@ -417,6 +429,8 @@ public class Sporty extends ListActivity {
 						standardowe();
 						naHali();
 						naDworze();
+						wZimie();
+						listArray.add("Sanki");
 
 					}
 
@@ -453,12 +467,219 @@ public class Sporty extends ListActivity {
 			break;
 		}
 		default: {
+			Log.i("B³¹d","Z³a pora roku");
+		}
 
+		}
+	}
+	
+	public void deszczowaPogoda(char poraDnia) {
+
+		char poraRoku = poraRoku();
+
+		switch (poraRoku) {
+		case 'w': {
+			// wiosna
+			switch (poraDnia) {
+			case 'r': {
+
+				// jest deszczowa pogoda, wiosna, ranek, dowolny dzieñ tygodnia (bo
+				// do 10 i tak wszystko zamkniête)
+
+				if ((temp >= -5) && (temp <= 25)) {
+					//co siê robi rano, kiedy pada?
+					listArray.add("Œpij dalej");
+					listArray.add("Zostañ w domu");
+				}
+				break;
+			}
+
+			case 'p':
+			case 'd':
+			case 'o':
+			case 'w': {
+				if ((dzienTygodnia.equals("Poniedzia³ek"))
+						|| (dzienTygodnia.equals("Wtorek"))
+						|| (dzienTygodnia.equals("Œroda"))
+						|| (dzienTygodnia.equals("Czwartek"))
+						|| (dzienTygodnia.equals("Pi¹tek"))
+						|| (dzienTygodnia.equals("Sobota"))) {
+
+					// jest deszczowa pogoda, wiosna, po³udnie+dzien+popoludnie+wieczór, na
+					// tygodniu + sobota
+					
+					if ((temp>=-10)&&(temp<0)){
+						naHali();
+					}
+					else if ((temp >= 0) && (temp < 35)) {					
+						naHali();					
+
+					}
+
+					else {
+
+						// jest deszczowa pogoda, wiosna, po³udnie+dzien+popoludnie+wieczór,
+						// niedziela
+						if ((temp >= 5) && (temp <= 35)) {							
+							listArray.add("Zostañ w domu");
+						}
+
+					}
+				}
+				break;
+			}
+
+			// w nocy i tak doda "Zostañ w domu"
+			
+			default: {		
+				Log.i("Deszczowo", "Zostañ w domu");
+			}
+			}
+			break;
+		}
+		case 'l': {// lato
+
+			switch (poraDnia) {
+			case 'r': {
+
+				// jest deszczowa pogoda, lato, ranek, dowolny dzieñ tygodnia (bo do
+				// 10 i tak wszystko zamkniête)
+				listArray.add("Czytaj ksi¹¿kê");
+				listArray.add("Zostañ w domu");
+				break;
+			}
+
+			case 'p': 
+			case 'd':
+			case 'o':
+			case 'w': {
+				if ((dzienTygodnia.equals("Poniedzia³ek"))
+						|| (dzienTygodnia.equals("Wtorek"))
+						|| (dzienTygodnia.equals("Œroda"))
+						|| (dzienTygodnia.equals("Czwartek"))
+						|| (dzienTygodnia.equals("Pi¹tek"))
+						|| (dzienTygodnia.equals("Sobota"))) {
+
+					// jest deszczowa pogoda, lato, po³udnie+dzien+popoludnie+wieczór, na
+					// tygodniu + sobota
+					
+					if ((temp>=-5)&&(temp<=35)){
+						naHali();
+					}
+
+				}
+				break;
+			}
+
+			
+			default: {
+				Log.i("Deszczowo", "Zostañ w domu");
+			}
+				break;
+			}
+		}
+		case 'j': { // jesien
+			
+			switch (poraDnia) {
+			case 'r': {
+
+				// jest deszczowa pogoda, jesien, ranek, dowolny dzieñ tygodnia (bo do
+				// 10 i tak wszystko zamkniête)
+				listArray.add("Œpij dalej");
+				break;
+			}
+
+			case 'p': 
+			case 'd':
+			case 'o':
+			case 'w': {
+				if ((dzienTygodnia.equals("Poniedzia³ek"))
+						|| (dzienTygodnia.equals("Wtorek"))
+						|| (dzienTygodnia.equals("Œroda"))
+						|| (dzienTygodnia.equals("Czwartek"))
+						|| (dzienTygodnia.equals("Pi¹tek"))
+						|| (dzienTygodnia.equals("Sobota"))) {
+
+					// jest deszczowa pogoda, jesien, po³udnie+dzien+popoludnie+wieczór, na
+					// tygodniu + sobota
+					
+					if((temp>=-20)&&(temp<=35)){						
+						naHali();							
+					}
+					
+
+					else {
+
+						// jest deszczowa pogoda, jesien, po³udnie+dzien+popoludnie+wieczór,
+						// niedziela
+						if ((temp >= -5) && (temp <= 35)) {
+							bieganie();
+							standardowe();
+							listArray.add("Jazda konna");
+						}
+
+					}
+				}
+				break;
+			}			
+			default: {
+				Log.i("Deszczowo", "Zostañ w domu");
+			}
+				break;
+			}
+			
+			break;
+		}
+		case 'z': { // zima
+			
+			switch (poraDnia) {
+			case 'r': {
+
+				// jest deszczowa pogoda, zima, ranek, dowolny dzieñ tygodnia (bo do
+				// 10 i tak wszystko zamkniête)
+				listArray.add("Œpij dalej");
+				break;
+			}
+
+			case 'p': 
+			case 'd':
+			case 'o':
+			case 'w': {
+				if ((dzienTygodnia.equals("Poniedzia³ek"))
+						|| (dzienTygodnia.equals("Wtorek"))
+						|| (dzienTygodnia.equals("Œroda"))
+						|| (dzienTygodnia.equals("Czwartek"))
+						|| (dzienTygodnia.equals("Pi¹tek"))
+						|| (dzienTygodnia.equals("Sobota"))) {
+
+					// jest deszczowa pogoda, zima, po³udnie+dzien+popoludnie+wieczór, na
+					// tygodniu + sobota
+					
+					if ((temp>=-30)&&(temp<=20)){				
+						naHali();
+					}																
+				}
+				break;
+			}
+
+			
+			default: {
+				Log.i("Deszczowo", "Zostañ w domu");
+			}
+				break;
+			}
+			
+			break;
+		}
+		default: {
+			Log.i("B³¹d","Z³a pora roku");
 		}
 
 		}
 	}
 
+	
+	
 	public char poraRoku() {
 
 		// mo¿na dodaæ np. przedwioœnie

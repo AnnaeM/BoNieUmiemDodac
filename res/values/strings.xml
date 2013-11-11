@@ -10,5 +10,6 @@
     <string name="title_activity_wypoczynek">WypoczynekActivity</string>
     <string name="title_activity_gps">GPS</string>
     <string name="title_activity_test">Test</string>
+    <string name="title_activity_ubrania">Ubrania</string>
 
 </resources>

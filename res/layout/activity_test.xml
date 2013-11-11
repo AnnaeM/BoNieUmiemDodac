@@ -42,7 +42,7 @@
         android:layout_below="@+id/pogoda"
         android:ems="10"
         android:hint="Temperatura w st C"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal|numberSigned" />
 
     <EditText
         android:id="@+id/wiatr"
@@ -61,7 +61,7 @@
         android:layout_alignLeft="@+id/wiatr"
         android:layout_alignParentBottom="true"
         android:onClick="sporty"
-        android:text="Sprawdz sporty" />
+        android:text="Sporty" />
 
     <EditText
         android:id="@+id/dzienTygodnia"
@@ -84,27 +84,17 @@
         android:hint="Data"
         android:inputType="number" />
     
-
     <EditText
         android:id="@+id/rok"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dzien"
         android:layout_alignRight="@+id/dzienTygodnia"
         android:layout_below="@+id/dzienTygodnia"
-        android:layout_toRightOf="@+id/sporty"
+        android:layout_toRightOf="@+id/minuty"
         android:ems="10"
         android:inputType="number"
         android:text="2013" />
-
-    <EditText
-        android:id="@+id/miesiac"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/godzina"
-        android:layout_alignTop="@+id/rok"
-        android:layout_toLeftOf="@+id/rok"
-        android:ems="10"
-        android:inputType="number" />
     
     <EditText
         android:id="@+id/godzina"
@@ -127,6 +117,25 @@
         android:ems="10"
         android:inputType="number"
         android:text="00" />
+
+    <Button
+        android:id="@+id/ubrania"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rok"
+        android:layout_alignParentBottom="true"
+        android:onClick="ubrania"
+        android:text="Ubrania" />
+
+    <EditText
+        android:id="@+id/miesiac"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dzien"
+        android:layout_alignTop="@+id/rok"
+        android:layout_toRightOf="@+id/sporty"
+        android:ems="10"
+        android:inputType="number" />
 
 </RelativeLayout>
 

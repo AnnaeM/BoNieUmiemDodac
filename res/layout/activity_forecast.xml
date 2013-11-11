@@ -63,5 +63,12 @@
         android:onClick="doWypoczynku"
         android:text="Wypoczynek" />
 
+    <Button
+        android:id="@+id/ubrania"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="doUbran" 
+        android:text="Ubrania" />
+
 </LinearLayout>
 </ScrollView>

@@ -46,6 +46,10 @@
             android:name="com.pogodaandek.Test"
             android:label="@string/title_activity_test" >
         </activity>
+        <activity
+            android:name="com.pogodaandek.Ubrania"
+            android:label="@string/title_activity_ubrania" >
+        </activity>
     </application>
 
 </manifest>
