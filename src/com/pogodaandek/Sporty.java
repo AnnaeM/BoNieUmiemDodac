@@ -108,7 +108,7 @@ public class Sporty extends ListActivity {
 		int i;
 		if (pogoda.equals("pogodnie")) {
 			ladnaPogoda(poraDnia);
-		} else if (pogoda.equals("przewaga chmur"))
+		} else if ((pogoda.equals("przewaga chmur"))||(pogoda.equals("Przewaga chmur")))
 			ladnaPogoda(poraDnia);
 		else if (pogoda.equals("ob³oki zanikaj¹ce"))
 			ladnaPogoda(poraDnia);
@@ -151,8 +151,6 @@ public class Sporty extends ListActivity {
 			pora = 'r'; // ranek
 		else if ((godzina >= 11) && (godzina < 13))
 			pora = 'p'; // "poludnie";
-		else if ((godzina >= 11) && (godzina < 13))
-			pora = 'd'; // "dzieñ";
 		else if ((godzina >= 14) && (godzina < 17))
 			pora = 'o'; // "popo³udnie";
 		else if ((godzina >= 18) && (godzina < 21))
@@ -186,7 +184,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p':
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -202,7 +199,7 @@ public class Sporty extends ListActivity {
 					if ((temp>=-10)&&(temp<0)){
 						naHali();
 					}
-					else if ((temp >= 0) && (temp < 35)) {
+					else if((temp >= 0) && (temp < 35)) {
 						bieganie();
 						standardowe();
 						naHali();
@@ -259,7 +256,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -330,7 +326,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -354,7 +349,7 @@ public class Sporty extends ListActivity {
 						naDworze();
 
 					}
-					
+				}
 
 					else {
 
@@ -367,7 +362,7 @@ public class Sporty extends ListActivity {
 						}
 
 					}
-				}
+				
 				break;
 			}
 
@@ -407,7 +402,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -495,7 +489,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p':
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -550,7 +543,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -590,7 +582,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -615,6 +606,7 @@ public class Sporty extends ListActivity {
 						if ((temp >= -5) && (temp <= 35)) {
 							bieganie();
 							standardowe();
+							naHali();
 							listArray.add("Jazda konna");
 						}
 
@@ -642,7 +634,6 @@ public class Sporty extends ListActivity {
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))

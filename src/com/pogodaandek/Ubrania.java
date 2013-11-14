@@ -30,8 +30,13 @@ public class Ubrania extends Activity {
 			
 			temp = jObject.getDouble("feelslike_c");
 			//miesiac = jObject.getInt("month");
+			pogoda = jObject.getString("weather");
 			
-			ubierz();		
+			if((pogoda.equals("deszcz"))||pogoda.equals("lekki deszcz")||pogoda.equals("lekkie przelotne deszcze")||
+					pogoda.equals("m¿awka"))
+				ubierzDeszczowo();
+			else
+				ubierz();		
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +70,7 @@ public class Ubrania extends Activity {
 		obrazek.setImageDrawable(layerDrawable);
 		*/
 		
-		if(temp<10){	
+		if(temp<0){	
 			Drawable[] layers = new Drawable[6];
 			layers[0] = r.getDrawable(R.drawable.kobieta);
 			layers[1] = r.getDrawable(R.drawable.buty_k);
@@ -73,6 +78,18 @@ public class Ubrania extends Activity {
 			layers[3] = r.getDrawable(R.drawable.kurtka_k);	
 			layers[4] = r.getDrawable(R.drawable.szalik_k);	
 			layers[5] = r.getDrawable(R.drawable.czapka_k);	
+			LayerDrawable layerDrawable = new LayerDrawable(layers);
+			obrazek.setImageDrawable(layerDrawable);
+			
+		}
+		
+		else if (temp<10){
+			Drawable[] layers = new Drawable[5];
+			layers[0] = r.getDrawable(R.drawable.kobieta);
+			layers[1] = r.getDrawable(R.drawable.buty_k);
+			layers[2] = r.getDrawable(R.drawable.spodniedl_k);		
+			layers[3] = r.getDrawable(R.drawable.kurtka_k);	
+			layers[4] = r.getDrawable(R.drawable.szalik_k);		
 			LayerDrawable layerDrawable = new LayerDrawable(layers);
 			obrazek.setImageDrawable(layerDrawable);
 			
@@ -129,4 +146,93 @@ public class Ubrania extends Activity {
 		
 	}
 
+	
+	
+	public void ubierzDeszczowo(){
+		
+		
+		obrazek = (ImageView)findViewById(R.id.obrazek);
+		Resources r = getResources();
+		
+		if(temp<2){	
+			//b³¹d zbyt ma³ej pamiêci przy 7 elementach na emulatorze
+			Drawable[] layers = new Drawable[7];
+			layers[0] = r.getDrawable(R.drawable.kobieta);
+			layers[1] = r.getDrawable(R.drawable.buty_k);
+			layers[2] = r.getDrawable(R.drawable.spodniedl_k);		
+			layers[3] = r.getDrawable(R.drawable.kurtka_k);	
+			layers[4] = r.getDrawable(R.drawable.szalik_k);	
+			layers[5] = r.getDrawable(R.drawable.czapka_k);	
+			layers[6] = r.getDrawable(R.drawable.parasolka_k);	
+			LayerDrawable layerDrawable = new LayerDrawable(layers);
+			obrazek.setImageDrawable(layerDrawable);
+			
+		}
+		
+		else if(temp<10){				
+			Drawable[] layers = new Drawable[6];
+			layers[0] = r.getDrawable(R.drawable.kobieta);
+			layers[1] = r.getDrawable(R.drawable.buty_k);
+			layers[2] = r.getDrawable(R.drawable.spodniedl_k);		
+			layers[3] = r.getDrawable(R.drawable.kurtka_k);	
+			layers[4] = r.getDrawable(R.drawable.szalik_k);	
+			layers[5] = r.getDrawable(R.drawable.parasolka_k);	
+			LayerDrawable layerDrawable = new LayerDrawable(layers);
+			obrazek.setImageDrawable(layerDrawable);
+			
+		}
+		
+		else if(temp<18){
+			//10-17
+			Drawable[] layers = new Drawable[6];
+			layers[0] = r.getDrawable(R.drawable.kobieta);
+			layers[1] = r.getDrawable(R.drawable.buty_k);
+			layers[2] = r.getDrawable(R.drawable.spodniedl_k);		
+			layers[3] = r.getDrawable(R.drawable.kurtka_k);	
+			layers[4] = r.getDrawable(R.drawable.szalik_k);	
+			layers[5] = r.getDrawable(R.drawable.parasolka_k);	
+			LayerDrawable layerDrawable = new LayerDrawable(layers);
+			obrazek.setImageDrawable(layerDrawable);
+			
+		}
+		
+		else if(temp<23){
+			//18-22
+			Drawable[] layers = new Drawable[5];
+			layers[0] = r.getDrawable(R.drawable.kobieta);
+			layers[1] = r.getDrawable(R.drawable.buty_k);
+			layers[2] = r.getDrawable(R.drawable.spodniedl_k);		
+			layers[3] = r.getDrawable(R.drawable.dlrekaw_k);	
+			layers[4] = r.getDrawable(R.drawable.parasolka_k);	
+			LayerDrawable layerDrawable = new LayerDrawable(layers);
+			obrazek.setImageDrawable(layerDrawable);
+			
+		}
+		
+		else if(temp<28){
+			//23-27
+			Drawable[] layers = new Drawable[5];
+			layers[0] = r.getDrawable(R.drawable.kobieta);
+			layers[1] = r.getDrawable(R.drawable.sandalki_k);
+			layers[2] = r.getDrawable(R.drawable.spodniedl_k);		
+			layers[3] = r.getDrawable(R.drawable.tshirt_k);	
+			layers[4] = r.getDrawable(R.drawable.parasolka_k);	
+			LayerDrawable layerDrawable = new LayerDrawable(layers);
+			obrazek.setImageDrawable(layerDrawable);
+		}
+		
+		else{
+			//28 i w górê
+			Drawable[] layers = new Drawable[5];
+			layers[0] = r.getDrawable(R.drawable.kobieta);
+			layers[1] = r.getDrawable(R.drawable.sandalki_k);
+			layers[2] = r.getDrawable(R.drawable.spodniekr_k);		
+			layers[3] = r.getDrawable(R.drawable.podkoszulek_k);
+			layers[4] = r.getDrawable(R.drawable.parasolka_k);	
+			LayerDrawable layerDrawable = new LayerDrawable(layers);
+			obrazek.setImageDrawable(layerDrawable);
+		}
+		
+		
+	}
 }

@@ -246,11 +246,13 @@ public class ForecastActivity extends Activity {
 				
 				Button b1 = (Button)findViewById(R.id.sporty);
 				Button b2 = (Button)findViewById(R.id.wypoczynek);
+				Button b3 = (Button)findViewById(R.id.ubrania);
 				
 				tv.setText("Przepraszamy!");
 				data.setText("Nie znaleziono podanego miasta: "+nazwaMiasta);
 				b1.setVisibility(View.INVISIBLE);
 				b2.setVisibility(View.INVISIBLE);
+				b3.setVisibility(View.INVISIBLE);
 			}
 
 		}
@@ -262,11 +264,13 @@ public class ForecastActivity extends Activity {
 			
 			Button b1 = (Button)findViewById(R.id.sporty);
 			Button b2 = (Button)findViewById(R.id.wypoczynek);
+			Button b3 = (Button)findViewById(R.id.ubrania);
 			
 			tv.setText("Przepraszamy!");
 			data.setText("Nie uda³o siê po³¹czyæ z serwerem.");
 			b1.setVisibility(View.INVISIBLE);
 			b2.setVisibility(View.INVISIBLE);
+			b3.setVisibility(View.INVISIBLE);
 		}
 
 	}
@@ -431,6 +435,7 @@ public class ForecastActivity extends Activity {
 		doAktywnosci.put("longitude", display_location.getString("longitude"));
 		doAktywnosci.put("feelslike_c", Double.valueOf(current_observation.getString("feelslike_c")));
 		doAktywnosci.put("weather", current_observation.getString("weather"));
+		//cndtns.weather = current_observation.getString("conditions");
 		doAktywnosci.put("wind_mph", current_observation.getString("wind_mph"));
 		
 	}
@@ -563,22 +568,25 @@ public class ForecastActivity extends Activity {
 		JSONObject pom3 = new JSONObject();
 		pom3 = astronomy.getJSONObject("sunrise");
 		Time g = new Time();
+		Time g2 = new Time();
+		Time g3 = new Time();
+		Time g4 = new Time();
 		g.hour = Integer.parseInt(pom3.getString("hour"));
 		g.minute = Integer.parseInt(pom3.getString("minute"));
 		astronomia.moonrise = g;
 		pom3 = astronomy.getJSONObject("sunset");
-		g.hour = Integer.parseInt(pom3.getString("hour"));
-		g.minute = Integer.parseInt(pom3.getString("minute"));
-		astronomia.moonset = g;
+		g2.hour = Integer.parseInt(pom3.getString("hour"));
+		g2.minute = Integer.parseInt(pom3.getString("minute"));
+		astronomia.moonset = g2;
 		astronomy = jObject.getJSONObject("sun_phase");
 		pom3 = astronomy.getJSONObject("sunrise");
-		g.hour = Integer.parseInt(pom3.getString("hour"));
-		g.minute = Integer.parseInt(pom3.getString("minute"));
-		astronomia.sunrise = g;
+		g3.hour = Integer.parseInt(pom3.getString("hour"));
+		g3.minute = Integer.parseInt(pom3.getString("minute"));
+		astronomia.sunrise = g3;
 		pom3 = astronomy.getJSONObject("sunset");
-		g.hour = Integer.parseInt(pom3.getString("hour"));
-		g.minute = Integer.parseInt(pom3.getString("minute"));
-		astronomia.sunset = g;
+		g4.hour = Integer.parseInt(pom3.getString("hour"));
+		g4.minute = Integer.parseInt(pom3.getString("minute"));
+		astronomia.sunset = g4;
 		Log.i("CZAS", astronomia.moonrise.hour + " "
 				+ astronomia.moonrise.minute);
 

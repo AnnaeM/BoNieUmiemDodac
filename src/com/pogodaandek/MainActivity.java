@@ -12,8 +12,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class MainActivity extends Activity implements LocationListener {
 
@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements LocationListener {
 		startActivity(intent);
 	}
 
+	
 	public void GPS(View view) {
 		uzyjGPS();
 
@@ -51,8 +52,6 @@ public class MainActivity extends Activity implements LocationListener {
 
 	}
 
-	// da³am to tutaj, jak by³ w oddzielnej klasie to siê zapêtla³ i nie da³o
-	// siê wróciæ
 	public void uzyjGPS() {
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -92,17 +91,16 @@ public class MainActivity extends Activity implements LocationListener {
 
 		else {
 
-			getSystemService(Context.LOCATION_SERVICE);
+		/*	getSystemService(Context.LOCATION_SERVICE);
 			locationManager.requestLocationUpdates(
 					LocationManager.GPS_PROVIDER, 0, 0, this);
-
+		 	*/
 			Location location = null;
-
 			
-	
 			int i = 0;
 			while ((location == null) && (i <= 100)) {
 			//while (location == null) {
+				getSystemService(Context.LOCATION_SERVICE);
 				locationManager.requestLocationUpdates(
 						LocationManager.GPS_PROVIDER, 0, 0, this);
 				location = locationManager
@@ -111,7 +109,7 @@ public class MainActivity extends Activity implements LocationListener {
 
 			}
 
-			//obs³uga b³êdu GPS (czyli to z czym siê tak gryz³am)
+			//obs³uga b³êdu GPS
 			if (i >= 100) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setTitle("Przepraszamy!")
@@ -134,8 +132,12 @@ public class MainActivity extends Activity implements LocationListener {
 				double szerokosc = (double) (location.getLatitude());
 				double dlugosc = (double) (location.getLongitude());
 
+			//	locationManager.removeUpdates(LocationManager.GPS_PROVIDER);
+			//	locationManager.removeUpdates(listener);
+				
 				doPogody(dlugosc, szerokosc);
 			}
+					
 		}
 	}
 
