@@ -49,7 +49,14 @@ public class Ubrania extends Activity {
 							.getString("weather");
 					wind = ForecastActivity._mainActivity.current_observation
 							.getString("wind_kph");
-					ubierz();
+					
+
+					if((pogoda.equals("deszcz"))||pogoda.equals("lekki deszcz")||pogoda.equals("lekkie przelotne deszcze")||
+							pogoda.equals("m¿awka"))
+						ubierzDeszczowo();
+					else
+						ubierz();
+					
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
