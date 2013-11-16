@@ -1,5 +1,0 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/kobieta" />
-    <!-- <item android:drawable="@drawable/tt" /> -->
-
-</layer-list> 

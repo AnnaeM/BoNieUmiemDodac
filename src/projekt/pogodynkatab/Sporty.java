@@ -53,6 +53,22 @@ public class Sporty extends ListActivity {
 									.getString("feelslike_c"));
 					pogoda = ForecastActivity._mainActivity.current_observation
 							.getString("weather");
+				
+					Log.i("G³upi jestem",pogoda.toString());	//i czemu tego nie wyœwietla?
+					if(pogoda.equals("")){
+						//bo w Pu³awach nie ma pogody :c
+						String pogodaAwaryjna;
+						pogodaAwaryjna = ForecastActivity._mainActivity.txt10day.get(0).fcttext.toString();
+						Log.i("Pusta pogoda", pogodaAwaryjna);
+						
+						int i=0;
+						while(pogodaAwaryjna.charAt(i)!='.'){
+							pogoda=pogoda+pogodaAwaryjna.charAt(i);
+							i++;
+						
+					}
+						Log.i("Pogoda awaryjna", pogoda);
+					}
 					wind = ForecastActivity._mainActivity.current_observation
 							.getString("wind_kph");
 					godzina =Integer.parseInt(dzien.data.hour);
@@ -93,6 +109,7 @@ public class Sporty extends ListActivity {
 		else{
 			try {
 				jObject = new JSONObject(getIntent().getStringExtra("Pogoda"));
+				Log.i("JSON w sportach", jObject.toString());
 				
 				city = jObject.getString("city");
 				temp = jObject.getDouble("feelslike_c"); // temp odczuwalna
@@ -138,7 +155,7 @@ public void wyborSportow(){
 
 		if (pogoda.equals("pogodnie")) {
 			ladnaPogoda(poraDnia);
-		} else if (pogoda.equals("przewaga chmur"))
+		} else if ((pogoda.equals("przewaga chmur"))||(pogoda.equals("Przewaga chmur")))
 			ladnaPogoda(poraDnia);
 		else if (pogoda.equals("ob³oki zanikaj¹ce"))
 			ladnaPogoda(poraDnia);
@@ -179,11 +196,11 @@ public void wyborSportow(){
 
 		if ((godzina >= 6) && (godzina < 10))
 			pora = 'r'; // ranek
-		else if ((godzina >= 10) && (godzina < 13))
+		else if ((godzina >= 10) && (godzina < 14))
 			pora = 'p'; // "poludnie";
-		else if ((godzina >= 14) && (godzina < 17))
+		else if ((godzina >= 14) && (godzina < 18))
 			pora = 'o'; // "popo³udnie";
-		else if ((godzina >= 18) && (godzina < 21))
+		else if ((godzina >= 18) && (godzina < 22))
 			pora = 'w'; // "wieczór";
 		else if ((godzina >= 22) && (godzina < 1))
 			pora = 'n'; // "noc";
