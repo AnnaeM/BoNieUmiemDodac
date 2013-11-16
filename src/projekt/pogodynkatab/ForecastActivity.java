@@ -16,9 +16,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.format.Time;
 import android.util.Log;
 import android.widget.TabHost;
@@ -40,11 +43,15 @@ public class ForecastActivity extends TabActivity {
 	public List<ForecastDay> simple10day;
 	public JSONObject jObject;
 	public JSONObject Lublin = new JSONObject();
+	boolean pobrano;
 
 	public static ForecastActivity _mainActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		pobrano=false;
+		
 		super.onCreate(savedInstanceState);
 		_mainActivity = this;
 		setContentView(R.layout.activity_forecast);
@@ -54,10 +61,12 @@ public class ForecastActivity extends TabActivity {
 			nazwaMiasta = extras.getString("Lokacja");
 			// TextView tv = (TextView) this.findViewById(R.id.lokacja2TB);
 			// tv.setText(nazwaMiasta);
-			pobierzPrognoze(nazwaMiasta);
-			Log.i("TUTAJ!", "Tutaj");
+				pobierzPrognoze(nazwaMiasta);
+				Log.i("TUTAJ!", "Tutaj");						
+			
 		}
 
+		if (pobrano) {
 		// ZAK£ADKI
 		TabHost tabHost = getTabHost(); // tab dla phoTOS
 		TabSpec pogospec = tabHost.newTabSpec("Pogoda"); // tytu³ i zdjecie
@@ -100,11 +109,13 @@ public class ForecastActivity extends TabActivity {
 		tabHost.addTab(sportSpec); // Adding videos tab
 		tabHost.addTab(godzSpec);
 		tabHost.addTab(dni10Spec);
+		}
 	}
 
 	public void pobierzPrognoze(String city) {
 		// TODO Auto-generated method stub
-
+		
+		
 		final String GET_WEATHER_URL;
 		if (Character.isDigit(city.charAt(0))) {
 			GET_WEATHER_URL = WEATHER_URL + city + ".json";
@@ -273,6 +284,7 @@ public class ForecastActivity extends TabActivity {
 					 * 
 					 * }
 					 */
+					pobrano=true;
 				}
 				for (ForecastDay d : this.simpleForecast) {
 					Log.i("10DAYS!!! " + d.data.day, d.data.pretty + " "
@@ -297,6 +309,22 @@ public class ForecastActivity extends TabActivity {
 				 */
 
 				Log.i("ERROR", "nie znaleziono miasta");
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle("Przepraszamy!")
+						.setMessage("Nie odnaleziono podanego miasta.")
+						.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int id) {
+										// TODO Auto-generated method stub
+										dialog.cancel();									
+										finish();
+									}
+								});
+				AlertDialog alert = builder.create();
+				alert.show();
 			}
 
 		}
@@ -315,6 +343,23 @@ public class ForecastActivity extends TabActivity {
 			 * b2.setVisibility(View.INVISIBLE);
 			 */
 			Log.i("ERROR", "nie uda³o siê po³¹czyæ z serwerem");
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Przepraszamy!")
+					.setMessage("Nie uda³o siê po³¹czyæ z serwerem.")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int id) {
+									// TODO Auto-generated method stub
+									dialog.cancel();									
+									finish();
+								}
+							});
+			AlertDialog alert = builder.create();
+			alert.show();
 		}
 
 	}

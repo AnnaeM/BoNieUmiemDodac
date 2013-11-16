@@ -179,10 +179,8 @@ public void wyborSportow(){
 
 		if ((godzina >= 6) && (godzina < 10))
 			pora = 'r'; // ranek
-		else if ((godzina >= 11) && (godzina < 13))
+		else if ((godzina >= 10) && (godzina < 13))
 			pora = 'p'; // "poludnie";
-		else if ((godzina >= 11) && (godzina < 13))
-			pora = 'd'; // "dzieñ";
 		else if ((godzina >= 14) && (godzina < 17))
 			pora = 'o'; // "popo³udnie";
 		else if ((godzina >= 18) && (godzina < 21))
@@ -216,7 +214,6 @@ public void wyborSportow(){
 			}
 
 			case 'p':
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -289,7 +286,6 @@ public void wyborSportow(){
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -358,7 +354,6 @@ public void wyborSportow(){
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -435,7 +430,6 @@ public void wyborSportow(){
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -523,7 +517,6 @@ public void wyborSportow(){
 			}
 
 			case 'p':
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -569,7 +562,6 @@ public void wyborSportow(){
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -609,7 +601,6 @@ public void wyborSportow(){
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))
@@ -651,7 +642,6 @@ public void wyborSportow(){
 			}
 
 			case 'p': 
-			case 'd':
 			case 'o':
 			case 'w': {
 				if ((dzienTygodnia.equals("Poniedzia³ek"))

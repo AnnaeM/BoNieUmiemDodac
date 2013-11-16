@@ -73,6 +73,7 @@ public class Ubrania extends Activity {
 					temp = jObject.getDouble("feelslike_c");
 					pogoda = jObject.getString("weather");
 					
+					Log.i("Pogoda",pogoda.toString());
 					if((pogoda.equals("deszcz"))||pogoda.equals("lekki deszcz")||pogoda.equals("lekkie przelotne deszcze")||
 							pogoda.equals("m¿awka"))
 						ubierzDeszczowo();

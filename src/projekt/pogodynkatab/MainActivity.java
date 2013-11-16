@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements LocationListener{
 										int id) {
 									// TODO Auto-generated method stub
 									dialog.cancel();
-									finish();
+									//finish();
 								}
 							});
 
